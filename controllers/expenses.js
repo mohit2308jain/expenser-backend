@@ -26,11 +26,13 @@ const getExpenses = (req, res, db) => {
     db.select('*').from('expenses').where({
         user_id: id
     })
+    .orderBy('expense_date', 'desc')
     .then((expenses) => {
         if(expenses.length){
             res.json(expenses);
         }
         else{
+            console.log('kk')
             res.status(404).json('No expenses found')
         }
     })
@@ -81,7 +83,7 @@ const deleteExpense = (req, res, db) => {
     .where({ id: id })
     .del()
     .then((ress) => res.json(ress))
-    .catch(err => console.log(err));
+    .catch(err => res.status(400).json('Error in deleting'));
 }
 
 module.exports = {

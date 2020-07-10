@@ -11,8 +11,10 @@ const profile = require('./controllers/profile');
 const db = knex({
     client: 'pg',
     connection: {
-        connectionString: process.env.DATABASE_URL,
-        ssl: true
+        host: '127.0.0.1',
+        user: 'postgres',
+        password: 'mohit',
+        database: 'expenser'
     }
 });
 
@@ -32,6 +34,10 @@ app.post('/signin', (req, res) => {
 app.post('/register', (req, res) => {
     register.handleRegister(req, res, db, bcrypt);
 });
+
+app.get('/budget/:id', (req, res) => {
+    signin.getBudget(req, res, db);
+})
 
 app.put('/budget', (req, res) => {
     signin.updateBudget(req, res, db);
@@ -62,6 +68,6 @@ app.get('/profile/:id', (req, res) => {
 })
 
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3001, () => {
     console.log(`App running on port ${process.env.PORT}`);
 })

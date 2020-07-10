@@ -23,6 +23,17 @@ const handleSignin = (req, res, db, bcrypt) => {
         .catch((err) => res.status(400).json('Wrong credentials'));
 }
 
+const getBudget = (req, res, db) => {
+    const { id } = req.params;
+
+    db.select('budget').from('users')
+        .where('id', '=', id)
+        .then((budget) => {
+            res.json(budget[0]);
+        })
+        .catch((err) => res.status(400).json('Not available'));
+}
+
 const updateBudget = (req, res, db) => {
     const { id, budget } = req.body;
     db('users')
@@ -44,5 +55,6 @@ const updateBudget = (req, res, db) => {
 
 module.exports = {
     handleSignin: handleSignin,
-    updateBudget: updateBudget
+    updateBudget: updateBudget,
+    getBudget: getBudget
 }
