@@ -4,7 +4,7 @@
   "description": "Expense Manager web app.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "author": "Mohit",
   "license": "ISC",

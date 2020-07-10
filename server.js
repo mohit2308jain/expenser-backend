@@ -8,6 +8,7 @@ const signin = require('./controllers/signin');
 const expense = require('./controllers/expenses');
 const profile = require('./controllers/profile');
 
+/*
 const db = knex({
     client: 'pg',
     connection: {
@@ -15,6 +16,17 @@ const db = knex({
         user: 'postgres',
         password: 'mohit',
         database: 'expenser'
+    }
+});
+*/
+
+const db = knex({
+    client: 'pg',
+    connection: {
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
     }
 });
 
